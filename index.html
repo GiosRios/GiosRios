@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Gio Rios Ramirez – Portfolio</title>
+<meta name="description" content="UC Irvine mechanical engineering student focused on aerospace and robotics.">
+<style>
+/* Everything is inline: one file, no external fonts, scripts, or trackers. */
+:root{--bg:#f6f7f9;--card:#fff;--fg:#14191f;--mute:#5a6673;--line:#dde2e8;--acc:#1b5e9b;--accfg:#fff;color-scheme:light}
+@media (prefers-color-scheme:dark){:root{--bg:#10151a;--card:#182027;--fg:#e8ecf0;--mute:#9aa6b2;--line:#27323c;--acc:#7db4e6;--accfg:#0b1117;color-scheme:dark}}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{display:flex;flex-direction:column;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+header,footer{flex:none;display:flex;align-items:center;justify-content:space-between;padding:10px 16px}
+.brand{font-weight:700}
+button,.btn{font:inherit;cursor:pointer}
+.pill{border:1.5px solid var(--acc);background:transparent;color:var(--acc);border-radius:99px;padding:8px 16px;font-weight:600;min-height:44px}
+#pager{flex:1;min-height:0;display:flex;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;overscroll-behavior-x:contain}
+#pager::-webkit-scrollbar{display:none}
+@media (prefers-reduced-motion:reduce){#pager{scroll-behavior:auto}}
+.page{flex:none;width:100%;scroll-snap-align:start;overflow-y:auto;padding:12px 20px 20px;display:flex;flex-direction:column;gap:10px}
+.kicker{color:var(--mute);font-size:.9rem;margin:0}
+h1{font-size:2rem;line-height:1.15;margin:0;letter-spacing:-.02em}
+h2{font-size:1.5rem;line-height:1.2;margin:0}
+.lead{color:var(--mute);margin:0}
+.btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+.btn{display:inline-flex;align-items:center;padding:0 18px;min-height:46px;border-radius:10px;background:var(--acc);color:var(--accfg);text-decoration:none;font-weight:600}
+.btn.alt{background:transparent;color:var(--acc);border:1.5px solid var(--acc)}
+.chip{display:inline-block;align-self:flex-start;font-size:.75rem;font-weight:600;padding:2px 10px;border-radius:99px;border:1px solid var(--line);color:var(--mute)}
+.chip.on{color:var(--acc);border-color:var(--acc)}
+.photo{flex:none;height:28vh;max-height:240px;min-height:120px;border:1.5px dashed var(--line);border-radius:12px;display:flex;align-items:center;justify-content:center;text-align:center;padding:10px;color:var(--mute);font-size:.9rem}
+.page img{width:100%;height:28vh;max-height:240px;object-fit:cover;border-radius:12px}
+.label{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--mute);margin:6px 0 0}
+.page p{margin:0}
+.tl{list-style:none;margin:6px 0 0;padding:0 0 0 22px;border-left:2px solid var(--line)}
+.tl li{position:relative;margin:0 0 10px}
+.tl li::before{content:"";position:absolute;left:-29px;top:14px;width:12px;height:12px;border-radius:50%;background:var(--bg);border:2px solid var(--acc)}
+.tl li.now::before{background:var(--acc)}
+.tl li.plan::before{border-style:dashed}
+.tl a{display:block;padding:8px 10px;border-radius:10px;color:var(--fg);text-decoration:none;min-height:44px}
+.tl a:active,.tl a:focus-visible{background:var(--card)}
+.tl small{display:block;color:var(--mute)}
+#outline{position:fixed;inset:0;z-index:10;background:var(--bg);padding:calc(env(safe-area-inset-top,0px) + 12px) 20px 20px;overflow-y:auto}
+#outline[hidden]{display:none}
+#outline ol{margin:12px 0 0;padding:0;list-style:none}
+#outline a{display:block;padding:12px 4px;border-bottom:1px solid var(--line);color:var(--fg);text-decoration:none;font-weight:600}
+#outline .top{display:flex;justify-content:space-between;align-items:center}
+.dots{display:flex;gap:2px;align-items:center}
+.dots a{display:block;width:22px;height:44px;position:relative}
+.dots a::after{content:"";position:absolute;left:7px;top:19px;width:8px;height:8px;border-radius:50%;background:var(--line)}
+.dots a[aria-current="true"]::after{background:var(--acc);transform:scale(1.4)}
+.arrow{border:0;background:transparent;color:var(--acc);font-size:1.6rem;width:44px;height:44px}
+.arrow:disabled{opacity:.3}
+a:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+</style>
+</head>
+<body>
+
+<header>
+<span class="brand">Gio Rios Ramirez</span>
+<button class="pill" id="menuBtn" aria-expanded="false" aria-controls="outline">Outline</button>
+</header>
+
+<nav id="outline" hidden aria-label="Outline">
+<div class="top"><strong>Outline</strong><button class="pill" id="closeBtn">Close</button></div>
+<ol>
+<li><a href="#home">Home</a></li>
+<li><a href="#timeline">Timeline</a></li>
+<li><a href="#rc-car">Self-Driving RC Car</a></li>
+<li><a href="#sound-system">Car Audio System</a></li>
+<li><a href="#research">Aerodynamics Research</a></li>
+<li><a href="#rocket">L1 Rocket</a></li>
+<li><a href="#solar-airplane">Solar Airplane</a></li>
+<li><a href="#spider-robot">Spider Robot</a></li>
+<li><a href="#pump">Centrifugal Pump</a></li>
+</ol>
+</nav>
+
+<main id="pager">
+
+<!-- PAGE: HOME -->
+<section class="page" id="home" tabindex="-1">
+<p class="kicker">UC Irvine · Mechanical Engineering · B.S. June 2027</p>
+<h1>Gio Rios Ramirez</h1>
+<p class="lead">Aerospace and robotics. [Edit this line: one sentence on what you’re looking for, e.g. a summer internship in mechanical design or test.]</p>
+<div class="btns">
+<a class="btn" href="Resume_GioRR.pdf">Resume</a>
+<a class="btn alt" href="https://linkedin.com/in/gio-rios-ramirez">LinkedIn</a>
+<a class="btn alt" href="mailto:giorios2077@gmail.com">Email</a>
+</div>
+<p class="kicker" style="margin-top:12px">Swipe sideways, use the arrows, or tap Outline.</p>
+</section>
+
+<!-- PAGE: TIMELINE (tap an entry to jump to it) -->
+<section class="page" id="timeline" tabindex="-1">
+<h2>Timeline</h2>
+<ul class="tl">
+<li><a href="#rc-car">Self-Driving RC Car<small>Jan – May 2024</small></a></li>
+<li><a href="#sound-system">Car Audio System<small>Jun – Aug 2024</small></a></li>
+<li><a href="#research">Aerodynamics Research<small>Jul – Aug 2025</small></a></li>
+<li><a href="#rocket">L1 Rocket Certification<small>[add month, year]</small></a></li>
+<li class="now"><a href="#solar-airplane">Solar Airplane<small>Now · senior design</small></a></li>
+<li class="now"><a href="#spider-robot">Spider Robot<small>Now · building</small></a></li>
+<li class="plan"><a href="#pump">Centrifugal Pump<small>Planned</small></a></li>
+</ul>
+</section>
+
+<!--
+PROJECT PAGES: copy one block to add a project. To add a photo, replace the
+.photo div with:
+<img src="img/name.webp" alt="describe the photo" width="800" height="600" loading="lazy">
+Keep each photo under about 150 KB (WebP, ~800px wide) so it loads on a weak connection.
+-->
+
+<section class="page" id="rc-car" tabindex="-1">
+<p class="kicker">Jan – May 2024 · IVC Robotics Club</p>
+<h2>Self-Driving RC Car</h2>
+<span class="chip">Completed</span>
+<div class="photo">Photo: img/rc-car.webp</div>
+<p class="label">What I did</p>
+<p>[Write 2–3 sentences in your own words: the electrical diagram, the connections, the chassis mounts.]</p>
+<p class="label">What I learned</p>
+<p>[One thing you can explain in depth.]</p>
+</section>
+
+<section class="page" id="sound-system" tabindex="-1">
+<p class="kicker">Jun – Aug 2024 · Personal project</p>
+<h2>Car Audio System</h2>
+<span class="chip">Completed</span>
+<div class="photo">Photo: img/audio.webp</div>
+<p class="label">What I did</p>
+<p>[Write 2–3 sentences: the wiring plan, the upgrade, how you tested it.]</p>
+<p class="label">What I learned</p>
+<p>[One thing you can explain in depth, e.g. voltage drop or wire gauge.]</p>
+</section>
+
+<section class="page" id="research" tabindex="-1">
+<p class="kicker">Jul – Aug 2025 · IVC SPARK research internship</p>
+<h2>Aerodynamics Research</h2>
+<span class="chip">Completed</span>
+<div class="photo">Photo or plot: img/research.webp</div>
+<p class="label">What I did</p>
+<p>[Write 2–3 sentences in your own words about the question, the tools (Matlab, OpenVSP), and the result.]</p>
+<p class="label">What I learned</p>
+<p>[Be ready to explain what the 10% was measured against.]</p>
+</section>
+
+<section class="page" id="rocket" tabindex="-1">
+<p class="kicker">[month, year] · Club project</p>
+<h2>L1 Rocket Certification</h2>
+<span class="chip">Completed</span>
+<div class="photo">Photo: img/rocket.webp</div>
+<p class="label">What I did</p>
+<p>[Write 2–3 sentences: your role in the build and the flight.]</p>
+<p class="label">What I learned</p>
+<p>[One thing you can explain in depth.]</p>
+</section>
+
+<section class="page" id="solar-airplane" tabindex="-1">
+<p class="kicker">Now · Senior design · Aerodynamics sub team</p>
+<h2>Solar Airplane</h2>
+<span class="chip on">In progress</span>
+<div class="photo">Photo or render: img/airplane.webp</div>
+<p class="label">What I’m working on</p>
+<p>[Name your specific task on the aero team in 2–3 sentences.]</p>
+<p class="label">What I’m learning</p>
+<p>[One thing you can explain in depth.]</p>
+</section>
+
+<section class="page" id="spider-robot" tabindex="-1">
+<p class="kicker">Now · Personal project</p>
+<h2>4-Legged Spider Robot</h2>
+<span class="chip on">In progress</span>
+<div class="photo">Photo or CAD render: img/spider.webp</div>
+<p class="label">What I’ve done so far</p>
+<p>[Designed the CAD, bought the parts, assembled it with a friend. Add what you’re coding next.]</p>
+<p class="label">Next</p>
+<p>[Leg control and gait code. Link your code once it exists.]</p>
+</section>
+
+<section class="page" id="pump" tabindex="-1">
+<p class="kicker">Planned</p>
+<h2>Centrifugal Pump</h2>
+<span class="chip">Planned</span>
+<div class="photo">Sketch or calculation: img/pump.webp</div>
+<p class="label">The plan</p>
+<p>[Write what you intend to size, build, and test, and what you want to compare to your calculations.]</p>
+</section>
+
+</main>
+
+<footer>
+<button class="arrow" id="prev" aria-label="Previous page">‹</button>
+<div class="dots" id="dots" aria-hidden="true"></div>
+<button class="arrow" id="next" aria-label="Next page">›</button>
+</footer>
+
+<script>
+(function(){
+  var pager=document.getElementById('pager');
+  var pages=[].slice.call(pager.querySelectorAll('.page'));
+  var dots=document.getElementById('dots');
+  var prev=document.getElementById('prev'),next=document.getElementById('next');
+  var menu=document.getElementById('outline'),mb=document.getElementById('menuBtn');
+  pages.forEach(function(p){
+    var a=document.createElement('a');a.href='#'+p.id;dots.appendChild(a);
+  });
+  var dotEls=[].slice.call(dots.children);
+  function idx(){return Math.round(pager.scrollLeft/pager.clientWidth);}
+  function update(){
+    var i=Math.max(0,Math.min(pages.length-1,idx()));
+    dotEls.forEach(function(d,n){d.setAttribute('aria-current',n===i?'true':'false');});
+    prev.disabled=i===0;next.disabled=i===pages.length-1;
+  }
+  function go(i){
+    i=Math.max(0,Math.min(pages.length-1,i));
+    pager.scrollTo({left:i*pager.clientWidth});
+  }
+  pager.addEventListener('scroll',function(){window.requestAnimationFrame(update);},{passive:true});
+  prev.onclick=function(){go(idx()-1);};
+  next.onclick=function(){go(idx()+1);};
+  document.addEventListener('keydown',function(e){
+    if(e.key==='ArrowRight')go(idx()+1);
+    if(e.key==='ArrowLeft')go(idx()-1);
+    if(e.key==='Escape')closeMenu();
+  });
+  window.addEventListener('resize',function(){go(idx());});
+  function openMenu(){menu.hidden=false;mb.setAttribute('aria-expanded','true');}
+  function closeMenu(){menu.hidden=true;mb.setAttribute('aria-expanded','false');}
+  mb.onclick=openMenu;
+  document.getElementById('closeBtn').onclick=closeMenu;
+  [].slice.call(menu.querySelectorAll('a')).forEach(function(a){a.addEventListener('click',closeMenu);});
+  update();
+})();
+</script>
+</body>
+</html>
